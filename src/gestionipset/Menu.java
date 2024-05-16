@@ -4,17 +4,27 @@
  */
 package gestionipset;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author essid
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+    private int matricule;
+    
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pcRec.setVisible(false);
+    }
+    
+    public Menu(int matricule) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.matricule = matricule;
+        this.traiterRec.setVisible(false);
     }
 
     /**
@@ -27,68 +37,70 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        gdtEmp = new javax.swing.JButton();
+        traiterRec = new javax.swing.JButton();
+        pcRec = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Menu");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 448, -1));
 
-        jButton1.setText("G.employee");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        gdtEmp.setText("Gestion employee");
+        gdtEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                gdtEmpActionPerformed(evt);
             }
         });
+        getContentPane().add(gdtEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 46, 190, 35));
 
-        jButton2.setText("Traiter des rec");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        traiterRec.setText("Traiter les reclamations");
+        traiterRec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                traiterRecActionPerformed(evt);
             }
         });
+        getContentPane().add(traiterRec, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 190, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton1)
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton2)))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
+        pcRec.setText("Passer une reclamation");
+        pcRec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pcRecActionPerformed(evt);
+            }
+        });
+        getContentPane().add(pcRec, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 190, 30));
+
+        jLabel2.setText(".                                                                                                                                       .");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 410, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void traiterRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_traiterRecActionPerformed
         GestionRec rc = new GestionRec();
         rc.show(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_traiterRecActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        GestionEmplyee emp = new GestionEmplyee();
+    private void gdtEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gdtEmpActionPerformed
+        GestionEmplyee emp; 
+        if(this.matricule > 0){
+            emp= new GestionEmplyee(this.matricule);
+        }else {
+            emp= new GestionEmplyee();
+        }
         emp.show(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_gdtEmpActionPerformed
+
+    private void pcRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pcRecActionPerformed
+          ReclamtionEmp rcEmp = new ReclamtionEmp(this.matricule, "RH");
+          rcEmp.show(true);
+    }//GEN-LAST:event_pcRecActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,8 +138,10 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton gdtEmp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton pcRec;
+    private javax.swing.JButton traiterRec;
     // End of variables declaration//GEN-END:variables
 }

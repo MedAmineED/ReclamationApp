@@ -5,8 +5,12 @@
 package gestionipset;
 
 import Models.Employee;
+import Models.Historique;
 import Models.Specialite;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
@@ -14,11 +18,14 @@ import java.util.ArrayList;
  */
 public class GestionEmplyee extends javax.swing.JFrame {
 
+    private int matricule;
     /**
      * Creates new form GestionEtudiant
      */
     public GestionEmplyee() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.matricule = 222;
         Employee etd = new Employee();
         etd.afficher(tableEtudiant);
         Specialite sp = new Specialite();
@@ -27,6 +34,24 @@ public class GestionEmplyee extends javax.swing.JFrame {
                 spCmb.addItem(spt.getIdSp() + "_" + spt.getLebelle());
         }
     }
+
+    public GestionEmplyee(int id_rh) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.matricule = id_rh;
+        Employee etd = new Employee();
+        etd.afficher(tableEtudiant);
+        Specialite sp = new Specialite();
+        ArrayList<Specialite> toutSp = sp.getSpecialite();
+        for(Specialite spt : toutSp){
+                spCmb.addItem(spt.getIdSp() + "_" + spt.getLebelle());
+        }
+        this.historiqueBtn.setVisible(false);
+        this.statistiqueBtn.setVisible(false);
+        this.empExBtn.setVisible(false);
+    }
+    
+
 
 
     @SuppressWarnings("unchecked")
@@ -59,6 +84,10 @@ public class GestionEmplyee extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         spCmb = new javax.swing.JComboBox<>();
+        historiqueBtn = new javax.swing.JButton();
+        empExBtn = new javax.swing.JButton();
+        statistiqueBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,72 +174,117 @@ public class GestionEmplyee extends javax.swing.JFrame {
             }
         });
 
+        historiqueBtn.setText("Afficher historique");
+        historiqueBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historiqueBtnActionPerformed(evt);
+            }
+        });
+
+        empExBtn.setText("les employes exclus");
+        empExBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empExBtnActionPerformed(evt);
+            }
+        });
+
+        statistiqueBtn.setText("les satatistiques");
+        statistiqueBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statistiqueBtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Menu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(273, 273, 273)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(ajtBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(nomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(mtEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(prEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(mdpEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(adrEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(24, 24, 24)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mtEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(prEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mdpEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(adrEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(historiqueBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ajtBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statistiqueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(numtelEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(emailEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(spCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(21, 21, 21))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(rechInput, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(rechBtn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(modBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(suppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(274, 274, 274)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(13, 22, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(numtelEmp, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(emailEmp, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(spCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1)
+                                .addComponent(empExBtn)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rechInput, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rechBtn)
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(modBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(suppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 814, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(historiqueBtn)
+                            .addComponent(empExBtn)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(statistiqueBtn)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,10 +320,10 @@ public class GestionEmplyee extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(mtEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
-                        .addComponent(mdpEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(ajtBtn)
-                .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(mdpEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ajtBtn))))
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rechInput, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rechBtn)
@@ -267,16 +341,25 @@ public class GestionEmplyee extends javax.swing.JFrame {
 
     private void ajtBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajtBtnActionPerformed
                         Specialite sp = new Specialite(Integer.parseInt(spCmb.getSelectedItem().toString().split("_")[0]), spCmb.getSelectedItem().toString().split("_")[1]);
-                        Employee etd = new Employee(Integer.parseInt(mtEmp.getText()), mdpEmp.getText(), nomEmp.getText(), prEmp.getText(), adrEmp.getText(), numtelEmp.getText(), emailEmp.getText(), sp);
-                        etd.ajouter();
-                        etd.afficher(tableEtudiant);
+                        Employee emp = new Employee(Integer.parseInt(mtEmp.getText()), mdpEmp.getText(), nomEmp.getText(), prEmp.getText(), adrEmp.getText(), numtelEmp.getText(), emailEmp.getText(), sp);
+                        Historique hst = new Historique("le RH a ajoutee l'employe => nom : " + emp.getNom() + "| prenom : " + emp.getPrenom() + "| matricule : " + emp.getMatricule() + " comme un " + sp.getLebelle());
+                        emp.ajouter();
+                        emp.afficher(tableEtudiant);
+                        hst.ajouter();
+                        
     }//GEN-LAST:event_ajtBtnActionPerformed
 
     private void suppBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppBtnActionPerformed
-                        Employee etd = new Employee();
-                        etd.supprimer(Integer.parseInt(idInput.getText()));
-                        etd.afficher(tableEtudiant);
-           
+                    if(this.matricule == 222) {
+                        Employee emp = new Employee();
+                        emp.supprimer(Integer.parseInt(idInput.getText()));
+                        emp.afficher(tableEtudiant);
+                    }else {
+                        DemandeExclu dmn = new DemandeExclu(Integer.parseInt(idInput.getText()), this.matricule);
+                        dmn.show(true);
+                    }
+
+                    
     }//GEN-LAST:event_suppBtnActionPerformed
 
     private void rechBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechBtnActionPerformed
@@ -284,13 +367,62 @@ public class GestionEmplyee extends javax.swing.JFrame {
     }//GEN-LAST:event_rechBtnActionPerformed
 
     private void modBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modBtnActionPerformed
-             ModiferEmp md = new ModiferEmp(Integer.parseInt(this.idInput.getText()), tableEtudiant);
+             String sp = this.matricule == 222? "admin" : "RH";
+             ModiferEmp md = new ModiferEmp(Integer.parseInt(this.idInput.getText()), tableEtudiant, sp);
              md.show(true);
     }//GEN-LAST:event_modBtnActionPerformed
 
     private void spCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spCmbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_spCmbActionPerformed
+
+    private void historiqueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historiqueBtnActionPerformed
+        HistoriqueForm hst = new HistoriqueForm();
+        hst.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        hst.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                hst.dispose(); // Close the frame when the window is being closed
+            }
+        });
+        hst.show(true);
+    }//GEN-LAST:event_historiqueBtnActionPerformed
+
+    private void empExBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empExBtnActionPerformed
+        EmployeExForm empex = new EmployeExForm();
+        empex.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        empex.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                empex.dispose(); // Close the frame when the window is being closed
+            }
+        });
+        empex.show(true);
+    }//GEN-LAST:event_empExBtnActionPerformed
+
+    private void statistiqueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statistiqueBtnActionPerformed
+        StatistiqueForm stfrm =new StatistiqueForm();
+        stfrm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        stfrm.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                stfrm.dispose(); // Close the frame when the window is being closed
+            }
+        });
+        stfrm.show(true);
+    }//GEN-LAST:event_statistiqueBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Menu mn;    
+        if(this.matricule == 222) {
+                mn = new Menu();
+        }
+        else {
+               mn = new Menu(this.matricule);
+        }
+               mn.setVisible(true);
+               this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,7 +464,10 @@ public class GestionEmplyee extends javax.swing.JFrame {
     private javax.swing.JTextField adrEmp;
     private javax.swing.JButton ajtBtn;
     private javax.swing.JTextField emailEmp;
+    private javax.swing.JButton empExBtn;
+    private javax.swing.JButton historiqueBtn;
     private javax.swing.JTextField idInput;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -353,6 +488,7 @@ public class GestionEmplyee extends javax.swing.JFrame {
     private javax.swing.JButton rechBtn;
     private javax.swing.JTextField rechInput;
     private javax.swing.JComboBox<String> spCmb;
+    private javax.swing.JButton statistiqueBtn;
     private javax.swing.JButton suppBtn;
     private javax.swing.JTable tableEtudiant;
     // End of variables declaration//GEN-END:variables

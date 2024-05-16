@@ -69,8 +69,8 @@ public class Reclamation {
    public void afficherRec(JTable jTabel){
             Connection con = DbConnection.getConnection();
             try{
-                String sql = "SELECT *" +
-             "FROM reclamation WHERE mat_et = " + this.matriculeEmp + ";";
+                String sql = "SELECT num_dem AS numero_de_demande, contenu, etat, commentaire " +
+             "FROM reclamation WHERE mat_et = " + this.matriculeEmp + " ORDER BY num_dem DESC;";
                 PreparedStatement ps = con.prepareStatement(sql);
                 ResultSet rs =ps.executeQuery();
                 jTabel.setModel(DbUtils.resultSetToTableModel(rs));
@@ -83,7 +83,7 @@ public class Reclamation {
    public void afficher(JTable jTabel){
             Connection con = DbConnection.getConnection();
             try{
-                String sql= "SELECT R.num_dem AS numero_Reclammation, contenu, E.nom, E.prenom, E.matricule, R.etat, R.commentaire FROM reclamation R, employee E WHERE mat_et = matricule;";
+                String sql= "SELECT R.num_dem AS numero_Reclammation, contenu, E.nom, E.prenom, E.matricule, R.etat, R.commentaire FROM reclamation R, employee E WHERE mat_et = matricule ORDER BY num_dem DESC;";
                 PreparedStatement ps = con.prepareStatement(sql);
                 ResultSet rs =ps.executeQuery();
                 jTabel.setModel(DbUtils.resultSetToTableModel(rs));
@@ -96,7 +96,7 @@ public class Reclamation {
    public void modifier(int numRec, String etat, String commentaire) {
     try {
         Connection con = DbConnection.getConnection();
-        String sql = "UPDATE reclamation SET etat=?, commentaire=? WHERE num_dem=?";
+        String sql = "UPDATE reclamation SET etat=?, commentaire=? WHERE num_dem=? AND etat = 'en cours'";
         
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, etat);
@@ -122,7 +122,7 @@ public class Reclamation {
             try{
                 Connection con = DbConnection.getConnection();
                 
-                String sql= "select * from reclamation WHERE num_dem = ? AND mat_et = ?;";
+                String sql= "select * from reclamation WHERE num_dem = ? AND mat_et = ? AND etat = 'en cours';";
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setInt(1, this.numRec);
                 ps.setInt(2, this.matriculeEmp);

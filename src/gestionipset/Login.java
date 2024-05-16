@@ -18,6 +18,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -47,6 +48,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jButton2.setText("annuler");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Source Sans Pro Black", 1, 18)); // NOI18N
         jLabel1.setText("login");
@@ -122,13 +128,20 @@ public class Login extends javax.swing.JFrame {
                 if(isConnectedAd){
                     Menu mn =   new Menu();
                     mn.setVisible(true);
+                    this.dispose();
                 }
                 else{
                     Employee emp = new Employee(Integer.parseInt(this.loginField.getText()), this.mdpField.getText());
                     boolean isConnectedEmp = emp.connexion();
-                    if(isConnectedEmp){
-                        ReclamtionEmp rcEmp = new ReclamtionEmp(Integer.parseInt(this.loginField.getText()));
+                    if(isConnectedEmp && !((emp.getSp().getLebelle()).equals("RH"))){
+                        ReclamtionEmp rcEmp = new ReclamtionEmp(Integer.parseInt(this.loginField.getText()), emp.getSp().getLebelle());
                         rcEmp.show(true);
+                        this.dispose();
+                    }
+                    else if(isConnectedEmp && emp.getSp().getLebelle().equals("RH")){
+                        Menu gtEmp = new Menu(Integer.parseInt(this.loginField.getText()));
+                        gtEmp.show(true);
+                        this.dispose();
                     }
                 }
     }//GEN-LAST:event_connecterBtnActionPerformed
@@ -136,6 +149,10 @@ public class Login extends javax.swing.JFrame {
     private void mdpFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mdpFieldActionPerformed
 
     }//GEN-LAST:event_mdpFieldActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

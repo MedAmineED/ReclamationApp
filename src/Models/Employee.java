@@ -66,7 +66,7 @@ public class Employee {
               return false;
             }
         
-        String query = "SELECT * FROM employee WHERE matricule = ?";
+        String query = "SELECT E.*, S.lebelle FROM employee E, specialite S WHERE etat = 1 AND matricule = ? AND E.sp_id = S.id_sp;";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, this.matricule);
@@ -76,8 +76,11 @@ public class Employee {
             while (rst.next()) {                
                 if(rst.getString(3).equals(this.mdp)){
                     exist = true;
+                    this.matricule = rst.getInt(2);
+                    this.sp = new Specialite(rst.getString(12));
                     System.out.print("\t"+ rst.getInt(2));
                     System.out.print("\t"+ rst.getString(3));
+                    System.out.print("specialite \t"+ rst.getString(12));
                     return true;
                 }
                 else {
@@ -96,7 +99,7 @@ public class Employee {
     public void afficher(JTable jTabel){
             Connection con = DbConnection.getConnection();
             try{
-                String sql= "select * from employee;";
+                String sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, S.lebelle as specialite from employee E, specialite S WHERE etat = 1 AND E.sp_id = S.id_sp;";
                 PreparedStatement ps = con.prepareStatement(sql);
                 ResultSet rs =ps.executeQuery();
                 jTabel.setModel(DbUtils.resultSetToTableModel(rs));
@@ -109,7 +112,7 @@ public class Employee {
  public void getEmployeeByMatricule(int matricule) {
     try {
         Connection con = DbConnection.getConnection();
-        String sql = "SELECT * FROM employee WHERE matricule=?";
+        String sql = "SELECT * FROM employee WHERE etat = 1 AND matricule=?";
         
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, matricule);
@@ -138,7 +141,7 @@ public class Employee {
         try{
             Connection con = DbConnection.getConnection();
             String sql = "INSERT INTO employee (matricule, mdp, nom, prenom, adresse, numtel, email, sp_id)"
-                + " VALUES(?,?,?,?,?,?,?);";
+                + " VALUES(?,?,?,?,?,?,?,?);";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, this.matricule);
@@ -148,7 +151,7 @@ public class Employee {
             ps.setString(5, this.adresse);
             ps.setString(6, this.numtel);
             ps.setString(7, this.email);
-            ps.setInt(7, this.sp.getIdSp());
+            ps.setInt(8, this.sp.getIdSp());
             
             ps.executeUpdate();
             
@@ -163,8 +166,7 @@ public class Employee {
             try{
         Connection con = DbConnection.getConnection();
         String tableName = "employee";
-        String columnName = "matricule";
-        String sql = "DELETE FROM " + tableName + " WHERE " + tableName + "." + columnName + " = " + matricule + ";";
+        String sql = "UPDATE " + tableName + " SET etat = 0 WHERE matricule = " + matricule + ";";
         
         PreparedStatement ps = con.prepareStatement(sql);
         
@@ -181,7 +183,7 @@ public class Employee {
 public void modifier() {
     try {
         Connection con = DbConnection.getConnection();
-        String sql = "UPDATE employee SET mdp=?, nom=?, prenom=?, adresse=?, numtel=?, email=? WHERE matricule=?";
+        String sql = "UPDATE employee SET mdp=?, nom=?, prenom=?, adresse=?, numtel=?, email=?, sp_id=? WHERE etat = 1 AND matricule=?";
         
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, this.mdp);
@@ -190,7 +192,9 @@ public void modifier() {
         ps.setString(4, this.adresse);
         ps.setString(5, this.numtel);
         ps.setString(6, this.email);
-        ps.setInt(7, this.matricule);
+        ps.setInt(7, this.sp.getIdSp());
+        ps.setInt(8, this.matricule);
+        
         
         int rowsAffected = ps.executeUpdate();
         
@@ -269,6 +273,14 @@ public void modifier() {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public Specialite getSp() {
+        return sp;
+    }
+
+    public void setSp(Specialite sp) {
+        this.sp = sp;
     }
 }
 

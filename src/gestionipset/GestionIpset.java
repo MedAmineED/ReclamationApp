@@ -4,7 +4,7 @@
  */
 package gestionipset;
 
-import Models.Admin;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,6 +17,7 @@ public class GestionIpset {
      */
     public static void main(String[] args) {
                Login lg = new Login();
+               lg.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                lg.setVisible(true);
     }
     

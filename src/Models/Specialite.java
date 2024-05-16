@@ -22,6 +22,10 @@ public class Specialite {
     public Specialite() {
     }
 
+    public Specialite(String lebelle) {
+        this.lebelle = lebelle;
+    }
+
     public Specialite(int idSp, String lebelle) {
         this.idSp = idSp;
         this.lebelle = lebelle;
@@ -41,11 +45,11 @@ public class Specialite {
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Specialite equipe = new Specialite(
+                Specialite spt = new Specialite(
                     rs.getInt("id_sp"),
                     rs.getString("lebelle")
                 );
-                allSpecialite.add(equipe);
+                allSpecialite.add(spt);
             }
             ps.close();
         } catch (SQLException e) {

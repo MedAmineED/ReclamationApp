@@ -5,6 +5,7 @@
 package gestionipset;
 
 import Models.Employee;
+import Models.Historique;
 import Models.Specialite;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -18,24 +19,28 @@ public class ModiferEmp extends javax.swing.JFrame {
     private int matricule;
     private JTable table;
     private Employee emp = new Employee();
+    private String specialite;
     /**
      * Creates new form Modifer
      */
     public ModiferEmp() {
         initComponents();
-                Specialite sp = new Specialite();
+        this.setLocationRelativeTo(null);
+        Specialite sp = new Specialite();
         ArrayList<Specialite> toutSp = sp.getSpecialite();
         for(Specialite spt : toutSp){
-                spCmb.addItem(spt.getIdSp() + "_" + spt.getLebelle());
+               spCmb.addItem(spt.getIdSp() + "_" + spt.getLebelle());
         }
     }
     
-    public ModiferEmp(int matricule, JTable table) {
+    
+    public ModiferEmp(int matricule, JTable table, String specialite) {
         this.matricule = matricule;
         this.table = table;
+        this.specialite = specialite;
         
         initComponents();
-        
+        this.setLocationRelativeTo(null);
         emp.getEmployeeByMatricule(matricule);
         
         this.nomEmp.setText(emp.getNom());
@@ -45,7 +50,12 @@ public class ModiferEmp extends javax.swing.JFrame {
         this.numtelEmp.setText(emp.getNumtel());
         this.emailEmp.setText(emp.getEmail());
         
-    }
+        Specialite sp = new Specialite();
+                ArrayList<Specialite> toutSp = sp.getSpecialite();
+                for(Specialite spt : toutSp){
+                     spCmb.addItem(spt.getIdSp() + "_" + spt.getLebelle());
+        }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,7 +121,7 @@ public class ModiferEmp extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("modifer employe");
 
-        spCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        spCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "specialite" }));
 
         jLabel6.setFont(new java.awt.Font("Source Sans Pro Black", 1, 18)); // NOI18N
         jLabel6.setText("Specialite");
@@ -204,10 +214,13 @@ public class ModiferEmp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ajtBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajtBtnActionPerformed
-              Specialite sp = new Specialite(Integer.parseInt(spCmb.getSelectedItem().toString().split("_")[0]), spCmb.getSelectedItem().toString().split("_")[1]);
+              
+            Specialite sp = new Specialite(Integer.parseInt(spCmb.getSelectedItem().toString().split("_")[0]), spCmb.getSelectedItem().toString().split("_")[1]);
               Employee employe = new Employee(this.matricule, this.mdpEmp.getText(), this.nomEmp.getText(), this.prEmp.getText(), this.adrEmp.getText(), this.numtelEmp.getText(), this.emailEmp.getText(), sp); 
               employe.modifier();
               employe.afficher(table);
+              Historique hst = new Historique("le "+ this.specialite+" a modifier l'employe de matricule : " + this.matricule);
+              hst.ajouter();
               this.show(false);
     }//GEN-LAST:event_ajtBtnActionPerformed
 

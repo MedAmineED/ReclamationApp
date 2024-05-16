@@ -12,17 +12,25 @@ import Models.Reclamation;
 public class ReclamtionEmp extends javax.swing.JFrame {
 
     private int matEmp;
+    private String specialite;
     /**
      * Creates new form ReclamtionEmp
      */
     public ReclamtionEmp() {
         initComponents();
+        this.setLocationRelativeTo(null);
         Reclamation rcm = new Reclamation();
+        this.mnBtn.setVisible(false);
         rcm.afficher(matTab);
     }
-    public ReclamtionEmp(int matRec) {
+    public ReclamtionEmp(int matRec, String specilite) {
         initComponents();
         this.matEmp = matRec;
+        this.specialite = specilite;
+        this.setLocationRelativeTo(null);
+        if(!specilite.equals("RH")){
+            this.mnBtn.setVisible(false);
+        }
         Reclamation rcm = new Reclamation(matRec);
         rcm.afficherRec(matTab);
     }
@@ -45,6 +53,7 @@ public class ReclamtionEmp extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        mnBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +93,13 @@ public class ReclamtionEmp extends javax.swing.JFrame {
             }
         });
 
+        mnBtn.setText("Menu");
+        mnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,16 +123,24 @@ public class ReclamtionEmp extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mnBtn)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(mnBtn))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contenuRec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -147,6 +171,12 @@ public class ReclamtionEmp extends javax.swing.JFrame {
          rclm.supprimer();
          rclm.afficherRec(matTab);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void mnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBtnActionPerformed
+                   Menu gtEmp = new Menu(this.matEmp);
+                        gtEmp.show(true);
+                   this.dispose();        
+    }//GEN-LAST:event_mnBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,6 +222,7 @@ public class ReclamtionEmp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable matTab;
+    private javax.swing.JButton mnBtn;
     private javax.swing.JTextField numRecl;
     // End of variables declaration//GEN-END:variables
 }
