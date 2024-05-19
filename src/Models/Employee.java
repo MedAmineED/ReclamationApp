@@ -78,9 +78,6 @@ public class Employee {
                     exist = true;
                     this.matricule = rst.getInt(2);
                     this.sp = new Specialite(rst.getString(12));
-                    System.out.print("\t"+ rst.getInt(2));
-                    System.out.print("\t"+ rst.getString(3));
-                    System.out.print("specialite \t"+ rst.getString(12));
                     return true;
                 }
                 else {
@@ -109,6 +106,40 @@ public class Employee {
             }
     }
     
+    public void rechercher(JTable jTabel, String option, String valeur) {
+            Connection con = DbConnection.getConnection();
+           String sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, S.lebelle as specialite from employee E, specialite S WHERE etat = 1 AND E.sp_id = S.id_sp;";
+           switch (option) {
+            case "Tout":
+                sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, S.lebelle as specialite from employee E, specialite S WHERE etat = 1 AND E.sp_id = S.id_sp;";
+                break;
+           case "Matrecule":
+                sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, S.lebelle as specialite from employee E, specialite S WHERE matricule = "+ valeur +" AND etat = 1 AND E.sp_id = S.id_sp;";
+                break;
+            case "Nom":
+                sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, S.lebelle as specialite from employee E, specialite S WHERE nom LIKE "+ valeur +" AND etat = 1 AND E.sp_id = S.id_sp;";
+                break;
+            case "Prenom":
+                sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, S.lebelle as specialite from employee E, specialite S WHERE prenom LIKE "+ valeur +" AND etat = 1 AND E.sp_id = S.id_sp;";
+                break;
+            case "Num_Tel":
+                sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, S.lebelle as specialite from employee E, specialite S WHERE numtel = "+ valeur +" AND etat = 1 AND E.sp_id = S.id_sp;";
+                break;
+            case "Specialiter":
+                sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, S.lebelle as specialite from employee E, specialite S WHERE S.lebelle = "+ valeur +" AND etat = 1 AND E.sp_id = S.id_sp;";
+                break;
+            default:
+                throw new AssertionError();
+        }
+            try{
+                PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs =ps.executeQuery();
+                jTabel.setModel(DbUtils.resultSetToTableModel(rs));
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+    }
  public void getEmployeeByMatricule(int matricule) {
     try {
         Connection con = DbConnection.getConnection();

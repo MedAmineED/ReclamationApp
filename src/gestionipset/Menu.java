@@ -36,46 +36,55 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         gdtEmp = new javax.swing.JButton();
         traiterRec = new javax.swing.JButton();
         pcRec = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Menu");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 448, -1));
-
+        gdtEmp.setBackground(new java.awt.Color(0, 51, 102));
+        gdtEmp.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        gdtEmp.setForeground(new java.awt.Color(255, 255, 255));
         gdtEmp.setText("Gestion employee");
         gdtEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gdtEmpActionPerformed(evt);
             }
         });
-        getContentPane().add(gdtEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 46, 190, 35));
+        getContentPane().add(gdtEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 280, 90));
 
+        traiterRec.setBackground(new java.awt.Color(0, 51, 102));
+        traiterRec.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        traiterRec.setForeground(new java.awt.Color(255, 255, 255));
         traiterRec.setText("Traiter les reclamations");
         traiterRec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 traiterRecActionPerformed(evt);
             }
         });
-        getContentPane().add(traiterRec, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 190, 30));
+        getContentPane().add(traiterRec, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 290, 90));
 
+        pcRec.setBackground(new java.awt.Color(0, 51, 102));
+        pcRec.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        pcRec.setForeground(new java.awt.Color(255, 255, 255));
         pcRec.setText("Passer une reclamation");
         pcRec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pcRecActionPerformed(evt);
             }
         });
-        getContentPane().add(pcRec, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 190, 30));
+        getContentPane().add(pcRec, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 280, 90));
 
         jLabel2.setText(".                                                                                                                                       .");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 410, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\essid\\Downloads\\aaaa.jpg")); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, -10, 1080, 570));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 510, 170));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -139,8 +148,9 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton gdtEmp;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton pcRec;
     private javax.swing.JButton traiterRec;
     // End of variables declaration//GEN-END:variables

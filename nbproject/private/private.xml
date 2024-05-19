@@ -3,21 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/GestionIpset.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/Models/Historique.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/Models/Reclamation.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/ReclamtionEmp.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/Menu.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/Models/Specialite.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/GestionRec.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/Models/Commentaire.java</file>
             <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/ModiferEmp.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/Models/Equipes.java</file>
             <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/GestionEmplyee.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/DBconnect/DbConnection.java</file>
+            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/DemandeExclu.java</file>
             <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/Login.java</file>
+            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/Menu.java</file>
+            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/Models/EmployeEx.java</file>
             <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/Models/Employee.java</file>
-            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/HistoriqueForm.java</file>
+            <file>file:/C:/Users/essid/devipset/java_ipset/examen/gestionIpset/src/gestionipset/StatistiqueForm.java</file>
         </group>
     </open-files>
 </project-private>

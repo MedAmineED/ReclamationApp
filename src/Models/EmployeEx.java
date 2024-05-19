@@ -63,7 +63,7 @@ public class EmployeEx {
         public void afficher(JTable jTabel){
             Connection con = DbConnection.getConnection();
             try{
-                String sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, Ex.etat AS decision from employee E, employesexclus Ex WHERE Ex.id_emp = E.matricule ORDER BY id_ex DESC;";
+                String sql= "select E.matricule, E.mdp as mot_de_passe, E.nom, E.prenom, adresse, numtel as numero_de_tel, email, Ex.etat AS decision, Ex.raison from employee E, employesexclus Ex WHERE Ex.id_emp = E.matricule ORDER BY id_ex DESC;";
                 PreparedStatement ps = con.prepareStatement(sql);
                 ResultSet rs =ps.executeQuery();
                 jTabel.setModel(DbUtils.resultSetToTableModel(rs));
